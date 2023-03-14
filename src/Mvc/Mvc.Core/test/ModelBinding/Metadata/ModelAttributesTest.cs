@@ -296,7 +296,7 @@ public class ModelAttributesTest
 
         // Assert
         var exception = Assert.Throws<InvalidOperationException>(() => ModelAttributes.GetAttributesForProperty(modelType, property));
-        Assert.Equal("Only one ModelMetadataType attribute is permitted per type.", exception.Message);
+        Assert.Equal("Multiple ModelMetadataType attributes on Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributesTest+InvalidBaseViewModel. Only one ModelMetadataType attribute is permitted per type.", exception.Message);
     }
 
     [ClassValidator]
