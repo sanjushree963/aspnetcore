@@ -130,6 +130,17 @@ namespace Microsoft.AspNetCore.Builder
 {{GetEndpoints(endpoints)}}
 }
 
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsage(AttributeTargets.Method)]
+    internal sealed class InterceptsLocationAttribute : Attribute
+    {
+        public InterceptsLocationAttribute(string filePath, int line, int column)
+        {
+        }
+    }
+}
+
 namespace Microsoft.AspNetCore.Http.Generated
 {
     using System;

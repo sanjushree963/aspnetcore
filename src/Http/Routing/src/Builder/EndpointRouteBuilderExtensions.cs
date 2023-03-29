@@ -227,11 +227,13 @@ public static class EndpointRouteBuilderExtensions
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
     [RequiresUnreferencedCode(MapEndpointUnreferencedCodeWarning)]
     [RequiresDynamicCode(MapEndpointDynamicCodeWarning)]
+    [System.Runtime.CompilerServices.Interceptable]
     public static RouteHandlerBuilder MapGet(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         Delegate handler)
     {
+        System.Console.WriteLine($"HandlerType: {handler.GetType()}");
         return MapMethods(endpoints, pattern, GetVerb, handler);
     }
 
@@ -245,11 +247,13 @@ public static class EndpointRouteBuilderExtensions
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
     [RequiresUnreferencedCode(MapEndpointUnreferencedCodeWarning)]
     [RequiresDynamicCode(MapEndpointDynamicCodeWarning)]
+    [System.Runtime.CompilerServices.Interceptable]
     public static RouteHandlerBuilder MapPost(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         Delegate handler)
     {
+        System.Console.WriteLine($"HandlerType: {handler.GetType()}");
         return MapMethods(endpoints, pattern, PostVerb, handler);
     }
 

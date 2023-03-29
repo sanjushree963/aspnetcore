@@ -37,52 +37,60 @@ namespace Microsoft.AspNetCore.Builder
         private static readonly string[] DeleteVerb = new[] { global::Microsoft.AspNetCore.Http.HttpMethods.Delete };
         private static readonly string[] PatchVerb = new[] { global::Microsoft.AspNetCore.Http.HttpMethods.Patch };
 
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 25, 13)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_25(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpRequest, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                25);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 26, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_26(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpResponse, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                26);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 27, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_27(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpRequest, global::Microsoft.AspNetCore.Http.HttpResponse, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                27);
         }
 
+    }
+}
+
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsage(AttributeTargets.Method)]
+    internal sealed class InterceptsLocationAttribute : Attribute
+    {
+        public InterceptsLocationAttribute(string filePath, int line, int column)
+        {
+        }
     }
 }
 

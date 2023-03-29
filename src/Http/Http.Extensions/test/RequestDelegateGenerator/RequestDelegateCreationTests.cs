@@ -53,6 +53,11 @@ app.MapGet("/hello", ({parameterType} p) => p == null ? "null!" : "Hello world!"
     [Fact]
     public async Task MapAction_MultipleSpecialTypeParam_StringReturn()
     {
+        // while (!System.Diagnostics.Debugger.IsAttached)
+        // {
+        //     System.Threading.Thread.Sleep(1000);
+        //     System.Console.WriteLine($"Waiting for attach on {System.Environment.ProcessId}");
+        // }
         var (results, compilation) = await RunGeneratorAsync("""
 app.MapGet("/hello", (HttpRequest req, HttpResponse res) => req is null || res is null ? "null!" : "Hello world!");
 """);

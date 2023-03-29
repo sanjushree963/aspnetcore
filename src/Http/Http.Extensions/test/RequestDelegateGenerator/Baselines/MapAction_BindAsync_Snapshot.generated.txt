@@ -37,277 +37,270 @@ namespace Microsoft.AspNetCore.Builder
         private static readonly string[] DeleteVerb = new[] { global::Microsoft.AspNetCore.Http.HttpMethods.Delete };
         private static readonly string[] PatchVerb = new[] { global::Microsoft.AspNetCore.Http.HttpMethods.Patch };
 
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 25, 13)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_25(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.MyBindAsyncRecord, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                25);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 26, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_26(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.MyBindAsyncRecord?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                26);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 27, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_27(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.MyBindAsyncStruct, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                27);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 28, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_28(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.MyBindAsyncStruct?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                28);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 29, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_29(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.MyNullableBindAsyncStruct, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                29);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 30, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_30(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.MyNullableBindAsyncStruct?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                30);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 31, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_31(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.MyBothBindAsyncStruct, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                31);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 32, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_32(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.MyBothBindAsyncStruct?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                32);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 33, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_33(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.MySimpleBindAsyncRecord, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                33);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 34, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_34(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.MySimpleBindAsyncRecord?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                34);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 35, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_35(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.MySimpleBindAsyncStruct, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                35);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 36, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_36(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.MySimpleBindAsyncStruct?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                36);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 37, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_37(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.BindAsyncFromImplicitStaticAbstractInterface, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                37);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 38, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_38(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.BindAsyncFromImplicitStaticAbstractInterface?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                38);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 39, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_39(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.InheritBindAsync, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                39);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 40, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_40(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.InheritBindAsync?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                40);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 41, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_41(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.HttpContext, global::Microsoft.AspNetCore.Http.Generators.Tests.BindAsyncFromExplicitStaticAbstractInterface, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                41);
         }
-        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet(
+        [global::System.Runtime.CompilerServices.InterceptsLocation(@"TestMapActions.cs", 42, 5)]
+        internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder MapGet_42(
             this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,
             [global::System.Diagnostics.CodeAnalysis.StringSyntax("Route")] string pattern,
-            global::System.Func<global::Microsoft.AspNetCore.Http.Generators.Tests.BindAsyncFromExplicitStaticAbstractInterface?, global::System.String> handler,
-            [global::System.Runtime.CompilerServices.CallerFilePath] string filePath = "",
-            [global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)
+            global::System.Delegate handler)
         {
             return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(
                 endpoints,
                 pattern,
                 handler,
                 GetVerb,
-                filePath,
-                lineNumber);
+                @"TestMapActions.cs",
+                42);
         }
 
+    }
+}
+
+namespace System.Runtime.CompilerServices
+{
+    [AttributeUsage(AttributeTargets.Method)]
+    internal sealed class InterceptsLocationAttribute : Attribute
+    {
+        public InterceptsLocationAttribute(string filePath, int line, int column)
+        {
+        }
     }
 }
 

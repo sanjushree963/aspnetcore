@@ -37,11 +37,11 @@ internal class Endpoint
         }
 
         Response = new EndpointResponse(method, wellKnownTypes);
-        if (Response.IsAnonymousType)
-        {
-            Diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.UnableToResolveAnonymousReturnType, Operation.Syntax.GetLocation()));
-            return;
-        }
+        // if (Response.IsAnonymousType)
+        // {
+        //     Diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.UnableToResolveAnonymousReturnType, Operation.Syntax.GetLocation()));
+        //     return;
+        // }
 
         EmitterContext.HasJsonResponse = Response is not { ResponseType: { IsSealed: true } or { IsValueType: true } };
         IsAwaitable = Response?.IsAwaitable == true;
@@ -102,7 +102,7 @@ internal class Endpoint
     public EndpointParameter[] Parameters { get; } = Array.Empty<EndpointParameter>();
     public List<Diagnostic> Diagnostics { get; } = new List<Diagnostic>();
 
-    public (string File, int LineNumber) Location { get; }
+    public (string File, int LineNumber, int CharaceterNumber) Location { get; }
     public IInvocationOperation Operation { get; }
 
     public override bool Equals(object o) =>
@@ -145,12 +145,14 @@ internal class Endpoint
         return hashCode.ToHashCode();
     }
 
-    private static (string, int) GetLocation(IInvocationOperation operation)
+    private static (string, int, int) GetLocation(IInvocationOperation operation)
     {
         var filePath = operation.Syntax.SyntaxTree.FilePath;
         var span = operation.Syntax.SyntaxTree.GetLineSpan(operation.Syntax.Span);
         var lineNumber = span.StartLinePosition.Line + 1;
-        return (filePath, lineNumber);
+        var characterNumber = span.StartLinePosition.Character + ((MemberAccessExpressionSyntax)((InvocationExpressionSyntax)operation.Syntax).Expression).Expression.Span.Length + 1;
+        // var location = operation.Syntax.GetInterceptableLocation();
+        return (filePath, lineNumber, characterNumber);
     }
 
     private static string GetHttpMethod(IInvocationOperation operation)

@@ -130,13 +130,12 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
                 using var codeWriter = new CodeWriter(stringWriter, baseIndent: 2);
                 foreach (var endpoint in dedupedByDelegate)
                 {
-                    codeWriter.WriteLine($"internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder {endpoint!.HttpMethod}(");
+                    codeWriter.WriteLine($$"""[global::System.Runtime.CompilerServices.InterceptsLocation(@"{{endpoint.Location.File}}", {{endpoint.Location.LineNumber}}, {{endpoint.Location.CharaceterNumber + 1}})]""");
+                    codeWriter.WriteLine($"internal static global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder {endpoint!.HttpMethod}_{endpoint.Location.LineNumber}(");
                     codeWriter.Indent++;
                     codeWriter.WriteLine("this global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder endpoints,");
                     codeWriter.WriteLine(@"[global::System.Diagnostics.CodeAnalysis.StringSyntax(""Route"")] string pattern,");
-                    codeWriter.WriteLine($"global::{endpoint!.EmitHandlerDelegateType()} handler,");
-                    codeWriter.WriteLine(@"[global::System.Runtime.CompilerServices.CallerFilePath] string filePath = """",");
-                    codeWriter.WriteLine("[global::System.Runtime.CompilerServices.CallerLineNumber]int lineNumber = 0)");
+                    codeWriter.WriteLine($"global::System.Delegate handler)");
                     codeWriter.Indent--;
                     codeWriter.StartBlock();
                     codeWriter.WriteLine("return global::Microsoft.AspNetCore.Http.Generated.GeneratedRouteBuilderExtensionsCore.MapCore(");
@@ -145,8 +144,8 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
                     codeWriter.WriteLine("pattern,");
                     codeWriter.WriteLine("handler,");
                     codeWriter.WriteLine($"{endpoint!.EmitVerb()},");
-                    codeWriter.WriteLine("filePath,");
-                    codeWriter.WriteLine("lineNumber);");
+                    codeWriter.WriteLine($$"""@"{{endpoint.Location.File}}",""");
+                    codeWriter.WriteLine($"{endpoint.Location.LineNumber});");
                     codeWriter.Indent--;
                     codeWriter.EndBlock();
                 }

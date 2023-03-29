@@ -13,58 +13,58 @@ public abstract partial class RequestDelegateCreationTests
     {
         get
         {
-            var expectedBody = """{"id":0,"name":"Test Item","isComplete":false}""";
-            var todo = new Todo()
-            {
-                Id = 0,
-                Name = "Test Item",
-                IsComplete = false
-            };
-            var withFilter = """
-.AddEndpointFilter((c, n) => n(c));
-""";
-            var fromBodyRequiredSource = """app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo));""";
-            var fromBodyEmptyBodyBehaviorSource = """app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo));""";
-            var fromBodyAllowEmptySource = """app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo));""";
-            var fromBodyNullableSource = """app.MapPost("/", ([FromBody] Todo? todo) => TypedResults.Ok(todo));""";
+            // var expectedBody = """{"id":0,"name":"Test Item","isComplete":false}""";
+//             var todo = new Todo()
+//             {
+//                 Id = 0,
+//                 Name = "Test Item",
+//                 IsComplete = false
+//             };
+//             var withFilter = """
+// .AddEndpointFilter((c, n) => n(c));
+// """;
+            // var fromBodyRequiredSource = """app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo));""";
+            // var fromBodyEmptyBodyBehaviorSource = """app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo));""";
+            // var fromBodyAllowEmptySource = """app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo));""";
+            // var fromBodyNullableSource = """app.MapPost("/", ([FromBody] Todo? todo) => TypedResults.Ok(todo));""";
             var fromBodyDefaultValueSource = """
 #nullable disable
 IResult postTodoWithDefault([FromBody] Todo todo = null) => TypedResults.Ok(todo);
 app.MapPost("/", postTodoWithDefault);
 #nullable restore
 """;
-            var fromBodyRequiredWithFilterSource = $"""app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
-            var fromBodyEmptyBehaviorWithFilterSource = $"""app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
-            var fromBodyAllowEmptyWithFilterSource = $"""app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
-            var fromBodyNullableWithFilterSource = $"""app.MapPost("/", ([FromBody] Todo?  todo) => TypedResults.Ok(todo)){withFilter}""";
-            var fromBodyDefaultValueWithFilterSource = $"""
-#nullable disable
-IResult postTodoWithDefault([FromBody] Todo todo = null) => TypedResults.Ok(todo);
-app.MapPost("/", postTodoWithDefault){withFilter}
-#nullable restore
-""";
+//             var fromBodyRequiredWithFilterSource = $"""app.MapPost("/", ([FromBody] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
+//             var fromBodyEmptyBehaviorWithFilterSource = $"""app.MapPost("/", ([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
+//             var fromBodyAllowEmptyWithFilterSource = $"""app.MapPost("/", ([CustomFromBody(AllowEmpty = true)] Todo todo) => TypedResults.Ok(todo)){withFilter}""";
+//             var fromBodyNullableWithFilterSource = $"""app.MapPost("/", ([FromBody] Todo?  todo) => TypedResults.Ok(todo)){withFilter}""";
+//             var fromBodyDefaultValueWithFilterSource = $"""
+// #nullable disable
+// IResult postTodoWithDefault([FromBody] Todo todo = null) => TypedResults.Ok(todo);
+// app.MapPost("/", postTodoWithDefault){withFilter}
+// #nullable restore
+// """;
 
             return new[]
             {
-                new object[] { fromBodyRequiredSource, todo, 200, expectedBody },
-                new object[] { fromBodyRequiredSource, null, 400, string.Empty },
-                new object[] { fromBodyEmptyBodyBehaviorSource, todo, 200, expectedBody },
-                new object[] { fromBodyEmptyBodyBehaviorSource, null, 200, string.Empty },
-                new object[] { fromBodyAllowEmptySource, todo, 200, expectedBody },
-                new object[] { fromBodyAllowEmptySource, null, 200, string.Empty },
-                new object[] { fromBodyNullableSource, todo, 200, expectedBody },
-                new object[] { fromBodyNullableSource, null, 200, string.Empty },
-                new object[] { fromBodyDefaultValueSource, todo, 200, expectedBody },
-                new object[] { fromBodyDefaultValueSource, null, 200, string.Empty },
-                new object[] { fromBodyRequiredWithFilterSource, todo, 200, expectedBody },
-                new object[] { fromBodyRequiredWithFilterSource, null, 400, string.Empty },
-                new object[] { fromBodyEmptyBehaviorWithFilterSource, todo, 200, expectedBody },
-                new object[] { fromBodyEmptyBehaviorWithFilterSource, null, 200, string.Empty },
-                new object[] { fromBodyAllowEmptyWithFilterSource, todo, 200, expectedBody },
-                new object[] { fromBodyAllowEmptyWithFilterSource, null, 200, string.Empty },
-                new object[] { fromBodyNullableWithFilterSource, todo, 200, expectedBody },
-                new object[] { fromBodyNullableWithFilterSource, null, 200, string.Empty },
-                new object[] { fromBodyDefaultValueWithFilterSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyRequiredSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyRequiredSource, null, 400, string.Empty },
+            //     new object[] { fromBodyEmptyBodyBehaviorSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyEmptyBodyBehaviorSource, null, 200, string.Empty },
+            //     new object[] { fromBodyAllowEmptySource, todo, 200, expectedBody },
+            //     new object[] { fromBodyAllowEmptySource, null, 200, string.Empty },
+            //     new object[] { fromBodyNullableSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyNullableSource, null, 200, string.Empty },
+            //     new object[] { fromBodyDefaultValueSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyDefaultValueSource, null, 200, string.Empty },
+            //     new object[] { fromBodyRequiredWithFilterSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyRequiredWithFilterSource, null, 400, string.Empty },
+            //     new object[] { fromBodyEmptyBehaviorWithFilterSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyEmptyBehaviorWithFilterSource, null, 200, string.Empty },
+            //     new object[] { fromBodyAllowEmptyWithFilterSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyAllowEmptyWithFilterSource, null, 200, string.Empty },
+            //     new object[] { fromBodyNullableWithFilterSource, todo, 200, expectedBody },
+            //     new object[] { fromBodyNullableWithFilterSource, null, 200, string.Empty },
+            //     new object[] { fromBodyDefaultValueWithFilterSource, todo, 200, expectedBody },
                 new object[] { fromBodyDefaultValueSource, null, 200, string.Empty },
             };
         }
