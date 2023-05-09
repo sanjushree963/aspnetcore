@@ -30,12 +30,18 @@ internal sealed class ComponentFactory
 
     private static ComponentTypeInfoCacheEntry GetComponentTypeInfo(Type componentType) =>
         _cachedComponentTypeInfo.GetOrAdd(componentType, static ([DynamicallyAccessedMembers(Component)] componentType) =>
-            new ComponentTypeInfoCacheEntry(GetDefaultRenderMode(componentType), CreatePropertyInjector(componentType)));
+            new ComponentTypeInfoCacheEntry(GetRenderModeFromComponentType(componentType), CreatePropertyInjector(componentType)));
 
     public IComponent InstantiateComponent(IServiceProvider serviceProvider, [DynamicallyAccessedMembers(Component)] Type componentType, IComponentRenderMode? callerSpecifiedRenderMode, out IComponentRenderMode? resolvedRenderMode)
     {
         var componentTypeInfo = GetComponentTypeInfo(componentType);
-        resolvedRenderMode = callerSpecifiedRenderMode ?? componentTypeInfo.DefaultRenderMode;
+
+        // We only allow a rendermode to be set on the component type, or at the call site, but not both
+        resolvedRenderMode = callerSpecifiedRenderMode is null
+            ? componentTypeInfo.RenderMode
+            : componentTypeInfo.RenderMode is null
+                ? callerSpecifiedRenderMode
+                : throw new InvalidOperationException($"The component type '{componentType}' has a fixed rendermode, so it is not valid to specify a rendermode when using this component.");
 
         IComponent component;
         if (resolvedRenderMode is not null)
@@ -76,8 +82,8 @@ internal sealed class ComponentFactory
         return component;
     }
 
-    private static IComponentRenderMode? GetDefaultRenderMode(Type componentType)
-        => componentType.GetCustomAttribute<DefaultRenderModeAttribute>()?.DefaultRenderMode;
+    private static IComponentRenderMode? GetRenderModeFromComponentType(Type componentType)
+        => componentType.GetCustomAttribute<RenderModeAttribute>()?.RenderMode;
 
     private static Action<IServiceProvider, IComponent> CreatePropertyInjector([DynamicallyAccessedMembers(Component)] Type type)
     {
@@ -122,6 +128,6 @@ internal sealed class ComponentFactory
 
     // Tracks information about a specific component type that ComponentFactory uses
     private record class ComponentTypeInfoCacheEntry(
-        IComponentRenderMode? DefaultRenderMode,
+        IComponentRenderMode? RenderMode,
         Action<IServiceProvider, IComponent> PerformPropertyInjection);
 }
