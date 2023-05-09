@@ -48,8 +48,8 @@ internal partial class EndpointHtmlRenderer
         {
             var result = prerenderMode switch
             {
-                ServerRenderMode { Prerender: true } => await PrerenderedServerComponentAsync(httpContext, GetOrCreateInvocationId(httpContext), componentType, parameters),
-                ServerRenderMode => NonPrerenderedServerComponent(httpContext, GetOrCreateInvocationId(httpContext), componentType, parameters),
+                ServerRenderMode { Prerender: true } => await PrerenderedServerComponentAsync(GetOrCreateInvocationId(httpContext), componentType, parameters),
+                ServerRenderMode => NonPrerenderedServerComponent(GetOrCreateInvocationId(httpContext), componentType, parameters),
                 WebAssemblyRenderMode { Prerender: true } => await PrerenderedWebAssemblyComponentAsync(componentType, parameters),
                 WebAssemblyRenderMode => NonPrerenderedWebAssemblyComponent(componentType, parameters),
                 AutoRenderMode => throw new NotImplementedException("TODO: Support AutoRenderMode by serializing both Server and WebAssembly markers in the response so the client can make a decision."),
