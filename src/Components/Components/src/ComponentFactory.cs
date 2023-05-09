@@ -83,7 +83,7 @@ internal sealed class ComponentFactory
     }
 
     private static IComponentRenderMode? GetRenderModeFromComponentType(Type componentType)
-        => componentType.GetCustomAttribute<RenderModeAttribute>()?.RenderMode;
+        => componentType.GetCustomAttribute<RenderModeAttribute>()?.Mode;
 
     private static Action<IServiceProvider, IComponent> CreatePropertyInjector([DynamicallyAccessedMembers(Component)] Type type)
     {

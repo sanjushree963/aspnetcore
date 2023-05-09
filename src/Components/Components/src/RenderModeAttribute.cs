@@ -16,5 +16,5 @@ public abstract class RenderModeAttribute : Attribute
     /// <summary>
     /// Gets the fixed rendering mode for a component type.
     /// </summary>
-    public abstract IComponentRenderMode RenderMode { get; }
+    public abstract IComponentRenderMode Mode { get; }
 }
