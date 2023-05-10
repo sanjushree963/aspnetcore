@@ -227,7 +227,6 @@ Microsoft.AspNetCore.Components.ParameterView.GetValueOrDefault<TValue>(string! 
 Microsoft.AspNetCore.Components.ParameterView.GetValueOrDefault<TValue>(string! parameterName, TValue defaultValue) -> TValue
 Microsoft.AspNetCore.Components.ParameterView.ParameterView() -> void
 Microsoft.AspNetCore.Components.ParameterView.SetParameterProperties(object! target) -> void
-Microsoft.AspNetCore.Components.ParameterView.ToDictionary() -> System.Collections.Generic.IReadOnlyDictionary<string!, object!>!
 Microsoft.AspNetCore.Components.ParameterView.TryGetValue<TValue>(string! parameterName, out TValue result) -> bool
 Microsoft.AspNetCore.Components.PersistentComponentState
 Microsoft.AspNetCore.Components.PersistentComponentState.PersistAsJson<TValue>(string! key, TValue instance) -> void

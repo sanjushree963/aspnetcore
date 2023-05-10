@@ -113,20 +113,6 @@ public readonly struct ParameterView
         return result;
     }
 
-    /// <summary>
-    /// Returns a list populated with the contents of the <see cref="ParameterView"/>.
-    /// </summary>
-    /// <returns>A list populated with the contents of the <see cref="ParameterView"/>.</returns>
-    public IReadOnlyList<ParameterValue> ToList()
-    {
-        var result = new List<ParameterValue>();
-        foreach (var entry in this)
-        {
-            result.Add(entry);
-        }
-        return result;
-    }
-
     internal ParameterView Clone()
     {
         if (ReferenceEquals(_frames, _emptyFrames))

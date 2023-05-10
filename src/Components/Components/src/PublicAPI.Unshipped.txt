@@ -15,11 +15,9 @@ Microsoft.AspNetCore.Components.ModelBindingContext
 Microsoft.AspNetCore.Components.ModelBindingContext.BindingContextId.get -> string!
 Microsoft.AspNetCore.Components.ModelBindingContext.Name.get -> string!
 Microsoft.AspNetCore.Components.ParameterView.ToDictionary() -> System.Collections.Generic.IReadOnlyDictionary<string!, object?>!
-Microsoft.AspNetCore.Components.ParameterView.ToList() -> System.Collections.Generic.IReadOnlyList<Microsoft.AspNetCore.Components.ParameterValue>!
 Microsoft.AspNetCore.Components.RenderHandle.DispatchExceptionAsync(System.Exception! exception) -> System.Threading.Tasks.Task!
 *REMOVED*Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri(string! relativeUri) -> System.Uri!
 Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri(string? relativeUri) -> System.Uri!
-Microsoft.AspNetCore.Components.Rendering.ComponentState.RenderMode.get -> Microsoft.AspNetCore.Components.IComponentRenderMode?
 Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.AddComponentParameter(int sequence, string! name, Microsoft.AspNetCore.Components.IComponentRenderMode! renderMode) -> void
 Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.AddComponentRenderMode(int sequence, Microsoft.AspNetCore.Components.IComponentRenderMode! renderMode) -> void
 Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.SetEventHandlerName(string! eventHandlerName) -> void

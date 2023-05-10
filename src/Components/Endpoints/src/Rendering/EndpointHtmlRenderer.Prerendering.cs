@@ -134,7 +134,7 @@ internal partial class EndpointHtmlRenderer
             _ => base.InstantiateComponentForRenderMode(componentType, componentTypeRenderMode, callerSpecifiedRenderMode, componentActivator),
         };
 
-    private static ServerComponentInvocationSequence GetOrCreateInvocationId(HttpContext httpContext)
+    internal static ServerComponentInvocationSequence GetOrCreateInvocationId(HttpContext httpContext)
     {
         if (!httpContext.Items.TryGetValue(ComponentSequenceKey, out var result))
         {

@@ -35,9 +35,23 @@ internal sealed class ComponentFactory
     public IComponent InstantiateComponent(IServiceProvider serviceProvider, [DynamicallyAccessedMembers(Component)] Type componentType, IComponentRenderMode? callerSpecifiedRenderMode)
     {
         var componentTypeInfo = GetComponentTypeInfo(componentType);
-        var component = callerSpecifiedRenderMode is null && componentTypeInfo.RenderMode is null
-            ? _componentActivator.CreateInstance(componentType)
-            : _renderer.InstantiateComponentForRenderMode(componentType, componentTypeInfo.RenderMode, callerSpecifiedRenderMode, _componentActivator);
+        IComponent component;
+
+        if (callerSpecifiedRenderMode is null && componentTypeInfo.RenderMode is null)
+        {
+            component = _componentActivator.CreateInstance(componentType);
+        }
+        else
+        {
+            component = _renderer.InstantiateComponentForRenderMode(componentType, componentTypeInfo.RenderMode, callerSpecifiedRenderMode, _componentActivator);
+
+            // The renderer may choose to supply a different component type
+            var instantiatedType = component.GetType();
+            if (instantiatedType != componentType)
+            {
+                componentTypeInfo = GetComponentTypeInfo(instantiatedType);
+            }
+        }
 
         if (component is null)
         {

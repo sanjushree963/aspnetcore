@@ -3,6 +3,8 @@
 
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components.Endpoints;
 
@@ -16,7 +18,7 @@ internal class InteractiveComponentMarker : IComponent
     private readonly IComponentRenderMode _renderMode;
     private readonly bool _prerender;
     private RenderHandle _renderHandle;
-    private IReadOnlyList<ParameterValue>? _latestParameters;
+    private IReadOnlyDictionary<string, object?>? _latestParameters;
 
     public InteractiveComponentMarker(Type componentType, IComponentRenderMode renderMode)
     {
@@ -31,6 +33,8 @@ internal class InteractiveComponentMarker : IComponent
         };
     }
 
+    [Inject] public IServiceProvider Services { get; set; } = default!;
+
     public void Attach(RenderHandle renderHandle)
     {
         _renderHandle = renderHandle;
@@ -40,34 +44,55 @@ internal class InteractiveComponentMarker : IComponent
     {
         // We have to snapshot the parameters because ParameterView is like a ref struct - it can't escape the
         // call stack because the underlying buffer may get reused. This is enforced through a runtime check.
-        _latestParameters = parameters.ToList();
-
-        _renderHandle.Render(BuildRenderTree);
-        return Task.CompletedTask;
-    }
-
-    private void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, "blazor-component");
-        builder.AddAttribute(1, "render-mode", _renderMode);
+        _latestParameters = parameters.ToDictionary();
 
         if (_prerender)
         {
-            builder.OpenComponent(100, _componentType);
-
-            foreach (var entry in _latestParameters!)
-            {
-                builder.AddComponentParameter(101, entry.Name, entry.Value);
-            }
-
-            // Avoid infinite recursion by explicitly disabling any component-level render mode
-            // on the prerendered child
-            builder.AddComponentRenderMode(102, BypassRenderMode.Instance);
-
-            builder.CloseComponent();
+            _renderHandle.Render(Prerender);
         }
 
-        builder.CloseElement();
+        return Task.CompletedTask;
+    }
+
+    private void Prerender(RenderTreeBuilder builder)
+    {
+        builder.OpenComponent(0, _componentType);
+
+        foreach (var (name, value) in _latestParameters!)
+        {
+            builder.AddComponentParameter(1, name, value);
+        }
+
+        // Avoid infinite recursion by explicitly disabling any component-level render mode
+        // on the prerendered child
+        builder.AddComponentRenderMode(2, BypassRenderMode.Instance);
+
+        builder.CloseComponent();
+    }
+
+    public (ServerComponentMarker?, WebAssemblyComponentMarker?) ToMarkers(HttpContext httpContext)
+    {
+        var parameters = _latestParameters is null
+            ? ParameterView.Empty
+            : ParameterView.FromDictionary((IDictionary<string, object?>)_latestParameters);
+
+        ServerComponentMarker? serverMarker = null;
+        if (_renderMode is ServerRenderMode || _renderMode is AutoRenderMode)
+        {
+            // Lazy because we don't actually want to require a whole chain of services including Data Protection
+            // to be required unless you actually use Server render mode.
+            var serverComponentSerializer = Services.GetRequiredService<ServerComponentSerializer>();
+            var invocationId = EndpointHtmlRenderer.GetOrCreateInvocationId(httpContext);
+            serverMarker = serverComponentSerializer.SerializeInvocation(invocationId, _componentType, parameters, _prerender);
+        }
+
+        WebAssemblyComponentMarker? webAssemblyMarker = null;
+        if (_renderMode is WebAssemblyRenderMode ||  _renderMode is AutoRenderMode)
+        {
+            webAssemblyMarker = WebAssemblyComponentSerializer.SerializeInvocation(_componentType, parameters, _prerender);
+        }
+
+        return (serverMarker, webAssemblyMarker);
     }
 
     // This is only used internally to Endpoints when prerendering
