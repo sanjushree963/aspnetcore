@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Components.Endpoints;
 
 public class EndpointHtmlRendererTest
 {
-    private const string PrerenderedComponentPattern = "^<!--Blazor:(?<preamble>.*?)-->(<!--bl:\\d+-->)?(?<content>.+?)(<!--/bl:\\d+-->)?<!--Blazor:(?<epilogue>.*?)-->$";
+    private const string PrerenderedComponentPattern = "^<!--Blazor:(?<preamble>.*?)-->(?<content>.+?)<!--Blazor:(?<epilogue>.*?)-->$";
     private const string ComponentPattern = "^<!--Blazor:(.*?)-->$";
 
     private static readonly IDataProtectionProvider _dataprotectorProvider = new EphemeralDataProtectionProvider();
