@@ -37,7 +37,6 @@ public class RazorComponentResultExecutor
         
         return RenderComponentToResponse(
             httpContext,
-            result.RenderMode,
             result.ComponentType,
             result.Parameters,
             result.PreventStreamingRendering);
@@ -45,7 +44,6 @@ public class RazorComponentResultExecutor
 
     internal static Task RenderComponentToResponse(
         HttpContext httpContext,
-        IComponentRenderMode? renderMode,
         Type componentType,
         IReadOnlyDictionary<string, object?>? componentParameters,
         bool preventStreamingRendering)
@@ -57,7 +55,6 @@ public class RazorComponentResultExecutor
             // backing buffers could come from a pool like they do during rendering.
             var hostParameters = ParameterView.FromDictionary(new Dictionary<string, object?>
             {
-                { nameof(RazorComponentEndpointHost.RenderMode), renderMode },
                 { nameof(RazorComponentEndpointHost.ComponentType), componentType },
                 { nameof(RazorComponentEndpointHost.ComponentParameters), componentParameters },
             });
