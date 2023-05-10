@@ -48,21 +48,26 @@ internal class InteractiveComponentMarker : IComponent
 
     private void BuildRenderTree(RenderTreeBuilder builder)
     {
+        builder.OpenElement(0, "blazor-component");
+        builder.AddAttribute(1, "render-mode", _renderMode);
+
         if (_prerender)
         {
-            builder.OpenComponent(0, _componentType);
+            builder.OpenComponent(100, _componentType);
 
             foreach (var entry in _latestParameters!)
             {
-                builder.AddComponentParameter(1, entry.Name, entry.Value);
+                builder.AddComponentParameter(101, entry.Name, entry.Value);
             }
 
             // Avoid infinite recursion by explicitly disabling any component-level render mode
             // on the prerendered child
-            builder.AddComponentRenderMode(2, BypassRenderMode.Instance);
+            builder.AddComponentRenderMode(102, BypassRenderMode.Instance);
 
             builder.CloseComponent();
         }
+
+        builder.CloseElement();
     }
 
     // This is only used internally to Endpoints when prerendering
