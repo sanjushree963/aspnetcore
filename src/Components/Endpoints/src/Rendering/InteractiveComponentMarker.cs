@@ -33,8 +33,6 @@ internal class InteractiveComponentMarker : IComponent
         };
     }
 
-    [Inject] public IServiceProvider Services { get; set; } = default!;
-
     public void Attach(RenderHandle renderHandle)
     {
         _renderHandle = renderHandle;
@@ -81,7 +79,8 @@ internal class InteractiveComponentMarker : IComponent
         {
             // Lazy because we don't actually want to require a whole chain of services including Data Protection
             // to be required unless you actually use Server render mode.
-            var serverComponentSerializer = Services.GetRequiredService<ServerComponentSerializer>();
+            var serverComponentSerializer = httpContext.RequestServices.GetRequiredService<ServerComponentSerializer>();
+
             var invocationId = EndpointHtmlRenderer.GetOrCreateInvocationId(httpContext);
             serverMarker = serverComponentSerializer.SerializeInvocation(invocationId, _componentType, parameters, _prerender);
         }
