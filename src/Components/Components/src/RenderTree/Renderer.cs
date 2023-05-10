@@ -135,12 +135,22 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
     /// been resolved.
     /// </summary>
     /// <param name="componentType">The type of component being requested.</param>
-    /// <param name="renderMode">The <see cref="IComponentRenderMode"/>.</param>
+    /// <param name="componentTypeRenderMode">The <see cref="IComponentRenderMode"/> specified on the component type.</param>
+    /// <param name="callerSpecifiedRenderMode">The <see cref="IComponentRenderMode"/> specified by the consumer of the component.</param>
     /// <param name="componentActivator">The <see cref="IComponentActivator"/>.</param>
     /// <returns>An <see cref="IComponent"/> instance.</returns>
-    protected internal virtual IComponent InstantiateComponentForRenderMode(Type componentType, IComponentRenderMode renderMode, IComponentActivator componentActivator)
+    protected internal virtual IComponent InstantiateComponentForRenderMode(Type componentType, IComponentRenderMode? componentTypeRenderMode, IComponentRenderMode? callerSpecifiedRenderMode, IComponentActivator componentActivator)
+    {
         // Nothing is supported by default. Subclasses must override this to opt into supporting specific render modes.
-        => throw new NotSupportedException($"The current renderer does not support the render mode {renderMode}.");
+        if (componentTypeRenderMode is not null && callerSpecifiedRenderMode is not null)
+        {
+            throw new InvalidOperationException($"The component type '{componentType}' has a fixed rendermode, so it is not valid to specify a rendermode when using this component.");
+        }
+        else
+        {
+            throw new NotSupportedException($"The current renderer does not support the render mode {componentTypeRenderMode ?? callerSpecifiedRenderMode}.");
+        }
+    }
 
     private async void RenderRootComponentsOnHotReload()
     {

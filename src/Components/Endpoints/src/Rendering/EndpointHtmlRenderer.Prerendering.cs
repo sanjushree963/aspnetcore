@@ -125,6 +125,15 @@ internal partial class EndpointHtmlRenderer
         }
     }
 
+    protected override IComponent InstantiateComponentForRenderMode(Type componentType, IComponentRenderMode? componentTypeRenderMode, IComponentRenderMode? callerSpecifiedRenderMode, IComponentActivator componentActivator)
+        => (callerSpecifiedRenderMode, componentTypeRenderMode) switch
+        {
+            (InteractiveComponentMarker.BypassRenderMode, _) => componentActivator.CreateInstance(componentType),
+            ({ } mode, _) => new InteractiveComponentMarker(componentType, mode),
+            (_, { } mode) => new InteractiveComponentMarker(componentType, mode),
+            _ => base.InstantiateComponentForRenderMode(componentType, componentTypeRenderMode, callerSpecifiedRenderMode, componentActivator),
+        };
+
     private static ServerComponentInvocationSequence GetOrCreateInvocationId(HttpContext httpContext)
     {
         if (!httpContext.Items.TryGetValue(ComponentSequenceKey, out var result))

@@ -35,20 +35,9 @@ internal sealed class ComponentFactory
     public IComponent InstantiateComponent(IServiceProvider serviceProvider, [DynamicallyAccessedMembers(Component)] Type componentType, IComponentRenderMode? callerSpecifiedRenderMode)
     {
         var componentTypeInfo = GetComponentTypeInfo(componentType);
-        IComponent component;
-
-        if (callerSpecifiedRenderMode is null)
-        {
-            component = componentTypeInfo.RenderMode is null
-                ? _componentActivator.CreateInstance(componentType) // Most common case, hence the checks being optimized for it
-                : _renderer.InstantiateComponentForRenderMode(componentType, componentTypeInfo.RenderMode, _componentActivator);
-        }
-        else
-        {
-            component = componentTypeInfo.RenderMode is null
-                ? _renderer.InstantiateComponentForRenderMode(componentType, callerSpecifiedRenderMode, _componentActivator)
-                : throw new InvalidOperationException($"The component type '{componentType}' has a fixed rendermode, so it is not valid to specify a rendermode when using this component.");
-        }
+        var component = callerSpecifiedRenderMode is null && componentTypeInfo.RenderMode is null
+            ? _componentActivator.CreateInstance(componentType)
+            : _renderer.InstantiateComponentForRenderMode(componentType, componentTypeInfo.RenderMode, callerSpecifiedRenderMode, _componentActivator);
 
         if (component is null)
         {
