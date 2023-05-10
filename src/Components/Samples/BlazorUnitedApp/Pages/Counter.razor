@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@attribute [OwnRenderMode]
 
 <PageTitle>Counter</PageTitle>
 
@@ -14,5 +15,10 @@
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    class OwnRenderModeAttribute : RenderModeAttribute
+    {
+        public override IComponentRenderMode Mode => RenderMode.Server;
     }
 }
