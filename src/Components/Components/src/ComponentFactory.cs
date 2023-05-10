@@ -32,44 +32,22 @@ internal sealed class ComponentFactory
         _cachedComponentTypeInfo.GetOrAdd(componentType, static ([DynamicallyAccessedMembers(Component)] componentType) =>
             new ComponentTypeInfoCacheEntry(GetRenderModeFromComponentType(componentType), CreatePropertyInjector(componentType)));
 
-    public IComponent InstantiateComponent(IServiceProvider serviceProvider, [DynamicallyAccessedMembers(Component)] Type componentType, IComponentRenderMode? callerSpecifiedRenderMode, out IComponentRenderMode? resolvedRenderMode)
+    public IComponent InstantiateComponent(IServiceProvider serviceProvider, [DynamicallyAccessedMembers(Component)] Type componentType, IComponentRenderMode? callerSpecifiedRenderMode)
     {
         var componentTypeInfo = GetComponentTypeInfo(componentType);
-
-        // We only allow a rendermode to be set on the component type, or at the call site, but not both
-        resolvedRenderMode = callerSpecifiedRenderMode is null
-            ? componentTypeInfo.RenderMode
-            : componentTypeInfo.RenderMode is null
-                ? callerSpecifiedRenderMode
-                : throw new InvalidOperationException($"The component type '{componentType}' has a fixed rendermode, so it is not valid to specify a rendermode when using this component.");
-
         IComponent component;
-        if (resolvedRenderMode is not null)
-        {
-            // This is the first point at which we've fully resolved the final render mode, so now we can check
-            // how this Renderer wants to handle it
-            if (!_renderer.SupportsRenderMode(resolvedRenderMode, out var usePlaceholder))
-            {
-                throw new NotSupportedException($"The current renderer does not support the render mode '{resolvedRenderMode}'.");
-            }
 
-            if (usePlaceholder)
-            {
-                // We swap out the real component type with RenderModePlaceholder so we can emit instructions
-                // into the document to instantiate the original component type
-                var placeholderComponent = new RenderModePlaceholder(resolvedRenderMode, componentType);
-                componentType = typeof(RenderModePlaceholder);
-                componentTypeInfo = GetComponentTypeInfo(componentType);
-                component = placeholderComponent;
-            }
-            else
-            {
-                component = _componentActivator.CreateInstance(componentType);
-            }
+        if (callerSpecifiedRenderMode is null)
+        {
+            component = componentTypeInfo.RenderMode is null
+                ? _componentActivator.CreateInstance(componentType) // Most common case, hence the checks being optimized for it
+                : _renderer.InstantiateComponentForRenderMode(componentType, componentTypeInfo.RenderMode, _componentActivator);
         }
         else
         {
-            component = _componentActivator.CreateInstance(componentType);
+            component = componentTypeInfo.RenderMode is null
+                ? _renderer.InstantiateComponentForRenderMode(componentType, callerSpecifiedRenderMode, _componentActivator)
+                : throw new InvalidOperationException($"The component type '{componentType}' has a fixed rendermode, so it is not valid to specify a rendermode when using this component.");
         }
 
         if (component is null)

@@ -127,18 +127,20 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
         => GetRequiredComponentState(componentId);
 
     /// <summary>
-    /// Determines whether this renderer supports the specified <see cref="IComponentRenderMode"/>.
+    /// Supplies a component instance for the specified <see cref="IComponentRenderMode"/>.
+    /// <see cref="Renderer"/> subclasses may override this to customize which render modes are supported
+    /// and how they are handled (for example, by instantiating a component of a different type).
+    ///
+    /// The framework will only call this method when a non-null <see cref="IComponentRenderMode"/> has
+    /// been resolved.
     /// </summary>
+    /// <param name="componentType">The type of component being requested.</param>
     /// <param name="renderMode">The <see cref="IComponentRenderMode"/>.</param>
-    /// <param name="usesPlaceholder">If true, indicates that the renderer will produce a placeholder instead of the component instance.</param>
-    /// <returns>True if the render mode is supported, otherwise false.</returns>
-    protected internal virtual bool SupportsRenderMode(IComponentRenderMode renderMode, out bool usesPlaceholder)
-    {
-        // Nothing is supported by default. Subclasses must override this to opt into supporting
-        // specific render modes.
-        usesPlaceholder = false;
-        return false;
-    }
+    /// <param name="componentActivator">The <see cref="IComponentActivator"/>.</param>
+    /// <returns>An <see cref="IComponent"/> instance.</returns>
+    protected internal virtual IComponent InstantiateComponentForRenderMode(Type componentType, IComponentRenderMode renderMode, IComponentActivator componentActivator)
+        // Nothing is supported by default. Subclasses must override this to opt into supporting specific render modes.
+        => throw new NotSupportedException($"The current renderer does not support the render mode {renderMode}.");
 
     private async void RenderRootComponentsOnHotReload()
     {
@@ -176,19 +178,7 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
     /// <param name="componentType">The type of the component to instantiate.</param>
     /// <returns>The component instance.</returns>
     protected IComponent InstantiateComponent([DynamicallyAccessedMembers(Component)] Type componentType)
-    {
-        var component = _componentFactory.InstantiateComponent(_serviceProvider, componentType, null, out var renderMode);
-
-        if (renderMode is not null)
-        {
-            // It's not clear this could be made to work, because there has to be something rendered at the top level
-            // to describe how to load framework scripts, etc. For now just make sure nobody is confused into thinking
-            // they could do this.
-            throw new InvalidOperationException("Root components cannot specify a render mode.");
-        }
-
-        return component;
-    }
+        => _componentFactory.InstantiateComponent(_serviceProvider, componentType, null);
 
     /// <summary>
     /// Associates the <see cref="IComponent"/> with the <see cref="Renderer"/>, assigning
@@ -516,9 +506,8 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
             ? FindCallerSpecifiedRenderMode(frames, frameIndex)
             : null;
 
-        var newComponent = _componentFactory.InstantiateComponent(_serviceProvider, frame.ComponentTypeField, callerSpecifiedRenderMode, out var resolvedRenderMode);
+        var newComponent = _componentFactory.InstantiateComponent(_serviceProvider, frame.ComponentTypeField, callerSpecifiedRenderMode);
         var newComponentState = AttachAndInitComponent(newComponent, parentComponentId);
-        newComponentState.RenderMode = resolvedRenderMode;
         frame.ComponentStateField = newComponentState;
         frame.ComponentIdField = newComponentState.ComponentId;
 
